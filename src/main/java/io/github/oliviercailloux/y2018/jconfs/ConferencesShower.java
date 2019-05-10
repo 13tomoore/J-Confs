@@ -2,23 +2,17 @@ package io.github.oliviercailloux.y2018.jconfs;
 
 import java.io.IOException;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-
 import com.hp.hpl.jena.rdf.model.EmptyListException;
 
 import net.fortuna.ical4j.data.ParserException;
-import net.fortuna.ical4j.model.DateTime;
 
 /**
  * this class show Conferences data

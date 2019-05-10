@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 
@@ -14,7 +12,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.fortuna.ical4j.data.ParserException;
-import net.fortuna.ical4j.model.DateTime;
 
 public class ConferencesFromICal implements ConferencesRetriever {
 

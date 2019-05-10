@@ -24,7 +24,7 @@
 				<dependency>
 					<groupId>org.eclipse.platform</groupId>
 					<artifactId>org.eclipse.swt.cocoa.macosx.x86_64</artifactId>
-					<version>3.105.2</version>
+					<version>4.3</version>
 					<exclusions>
 						<exclusion>
 							<groupId>org.eclipse.platform</groupId>
@@ -34,6 +34,7 @@
 				</dependency>
 			</dependencies>
 		</profile>
+		
 		<profile>
 			<id>Linux</id>
 			<activation>
@@ -46,7 +47,7 @@
 				<dependency>
 					<groupId>org.eclipse.platform</groupId>
 					<artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
-					<version>3.106.3</version>
+					<version>4.3</version>
 					<exclusions>
 						<exclusion>
 							<groupId>org.eclipse.platform</groupId>
@@ -56,73 +57,36 @@
 				</dependency>
 			</dependencies>
 		</profile>
+		
 		<profile>
-			<id>Windows64</id>
+			<id>Windows</id>
 			<activation>
 				<os>
-					<family>windows</family>
-					<arch>x86_64</arch>
+					<family>Windows</family>
 				</os>
 			</activation>
 			<dependencies>
 				<!-- SWT Support for Windows 32 Bits x86_64 -->
-				<!-- https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64 -->
 				<dependency>
 					<groupId>org.eclipse.swt</groupId>
 					<artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
 					<version>4.3</version>
-					<exclusions>
-						<exclusion>
-							<groupId>org.eclipse.platform</groupId>
-							<artifactId>org.eclipse.swt</artifactId>
-						</exclusion>
-					</exclusions>
 				</dependency>
 			</dependencies>
 		</profile>
-		<profile>
-			<id>Windows32</id>
-			<activation>
-				<os>
-					<family>windows</family>
-					<arch>x86</arch>
-				</os>
-			</activation>
-			<dependencies>
-				<!-- SWT Support For Windows 32 x86 -->
-				<dependency>
-					<groupId>org.eclipse.swt</groupId>
-					<artifactId>org.eclipse.swt.win32.win32.x86</artifactId>
-					<version>4.3</version>
-					<exclusions>
-						<exclusion>
-							<groupId>org.eclipse.platform</groupId>
-							<artifactId>org.eclipse.swt</artifactId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-				<dependency>
-					<groupId>dom4j</groupId>
-					<artifactId>dom4j</artifactId>
-					<version>1.6.1</version>
-				</dependency>
-
-			</dependencies>
-		</profile>
+		
 	</profiles>
 
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
-
-
-
+		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -130,7 +94,6 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.jsr107.ri</groupId>
@@ -163,7 +126,7 @@
 			<version>2.26</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mapsforge/mapsforge-core -->
+
 		<dependency>
 			<groupId>org.mapsforge</groupId>
 			<artifactId>mapsforge-core</artifactId>
@@ -176,6 +139,7 @@
 			<artifactId>mapsforge-map-awt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.mapsforge/mapsforge-themes -->
 		<dependency>
 			<groupId>org.mapsforge</groupId>
@@ -200,14 +164,18 @@
 			<version>2.3.1-b20150201.1248</version>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.mapsforge</groupId>
 			<artifactId>mapsforge-samples-awt</artifactId>
 			<version>0.6.1</version>
 		</dependency>
-
+		
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>27.1-jre</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

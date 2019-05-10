@@ -1,13 +1,11 @@
 package io.github.oliviercailloux.y2018.jconfs;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Set;
 
 import net.fortuna.ical4j.data.ParserException;
-import net.fortuna.ical4j.model.DateTime;
 
 /**
  * this interface read conference data and return a set of conference
