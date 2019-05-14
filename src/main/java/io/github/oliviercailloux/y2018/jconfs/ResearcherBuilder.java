@@ -1,5 +1,6 @@
 package io.github.oliviercailloux.y2018.jconfs;
 
+
 import java.util.Objects;
 
 import javax.ws.rs.client.Client;
@@ -55,19 +56,18 @@ public class ResearcherBuilder {
 	LSInput input= impl.createLSInput();
 
 	input.setStringData(result);
-
 	Document doc=builder.parse(input);
 	LOGGER.debug("item created",doc);
-
 	String searcher=Objects.requireNonNull(doc.getElementsByTagName("h4").item(0).getFirstChild().getTextContent());
 	String  nom=searcher.split(" ")[1];
 	String prenom=searcher.split(" ")[0];
 	Researcher researcher=new Researcher(nom,prenom);
 	NodeList listElements = doc.getElementsByTagName("li");
+	LOGGER.debug("Node list li "+listElements.item(2).getFirstChild().getTextContent());
 	researcher.setFunction(Objects.requireNonNull(listElements.item(2).getFirstChild().getTextContent()));
 	researcher.setPhone(Objects.requireNonNull(listElements.item(4).getFirstChild().getTextContent().trim()));
 	researcher.setOffice(Objects.requireNonNull(listElements.item(8).getFirstChild().getTextContent().trim()));
-	researcher.setMail(Objects.requireNonNull(listElements.item(10).getFirstChild().getTextContent().trim()));
+	researcher.setMail(Objects.requireNonNull(listElements.item(10).getFirstChild().getTextContent()));
 	listElements=doc.getElementsByTagName("a");
 	
 	String group="";

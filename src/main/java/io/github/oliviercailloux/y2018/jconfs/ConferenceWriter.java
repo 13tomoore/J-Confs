@@ -15,6 +15,7 @@ import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.model.property.XProperty;
 import net.fortuna.ical4j.validate.ValidationException;
 import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.Property;
 public class ConferenceWriter {
 	/**
 	 * Write the conference in form calendar 
@@ -37,7 +38,7 @@ public class ConferenceWriter {
 		  calendar.getProperties().add(CalScale.GREGORIAN);
 		  
 		  //Creating an event
-		  PropertyList propertyList = new PropertyList();
+		  PropertyList<Property> propertyList = new PropertyList<Property>();
 		 propertyList.add(new XProperty("X-DTSTART",conference.getStartDate().toString()));
 		 propertyList.add(new XProperty("X-DTEND",conference.getEndDate().toString()));
 		  
