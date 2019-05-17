@@ -9,45 +9,44 @@ Delivery schedule for 2019 :
 
 Delivery 1 :
 	Tasks :
-		Update dependencies if possible (Junit, Guava, as well as dependencies of different environments)
-		Update package "y2018 "to "y2019"
-		Deleting documents in resources that are not used
-		Apply best practices with Guava to the existing system :
-			Preconditions
-			StringBuilder (for toString)
-			getResources
-		Perform tests using JUnit for the following classes:
-			ConferenceWriter
-			Conferencereader or Readfileconference
-			Shower Conferences
-			ReverseGeoCode
-		Delete unused classes
-		Create packages to better divide the code according to dependencies between classes:
-			Mistletoe
-			Conference
-			Geo
-		Apply a Javadoc with defensive programming
-		Redefine some exception lifts that are too generic
-		Match an Icalendar file to a researcher
+		1) Update dependencies if possible (Junit, Guava, as well as dependencies of different environments)
+		2) Update package "y2018 "to "y2019"
+		3) Deleting documents in resources that are not used
+		4) Apply best practices with Guava to the existing system :
+			a) Preconditions
+			b) StringBuilder (for toString)
+			c) getResources
+		5) Perform tests using JUnit for the following classes:
+			a) ConferenceWriter
+			b) Conferencereader or Readfileconference
+			c) Shower Conferences
+			d) ReverseGeoCode
+		6) Delete unused classes
+		7) Create packages to better divide the code according to dependencies between classes:
+			a) Mistletoe
+			b) Conference
+			c) Geo
+		8) Apply a Javadoc with defensive programming
+		9) Redefine some exception lifts that are too generic
+		10) Match an Icalendar file to a researcher
 
 Delivery 2 :
 	Tasks :
-		Modify ConferenceGui with possibility:
-			The user selects his iCalendar
-			All the conferences of this iCalendar are displayed on the screen
-			Possibility to edit an Icalendar conference
-			Ability to display a map with the location of a selected conference
+		1)Modify ConferenceGui with possibility:
+			a) The user selects his iCalendar
+			b) All the conferences of this iCalendar are displayed on the screen
+			c) Possibility to edit an Icalendar conference
+			d) Ability to display a map with the location of a selected conference
 			
 Delivery 3 :
 	Tasks :
-		Do the JC functionality :
-			Method for filling the fields of the canvas with use of the POI library
-			Saving the file
-		In the continuity of delivery 2 we can also make the History feature:
-			When editing a conference from the GUI, the icalendar file is sent to a remote github repository
+		1) Do the JC functionality :
+			a) Method for filling the fields of the canvas with use of the POI library
+			b) Saving the file
+		2) In the continuity of delivery 2 we can also make the History feature:
+			a)When editing a conference from the GUI, the icalendar file is sent to a remote github repository
 			
 Delivery 4 :
-	Tasks :	
-		Continue the History feature
-		Do the Peterhead feature
-		
+	Tasks :
+		1) Continue the History feature
+		2) Do the Peterhead feature
