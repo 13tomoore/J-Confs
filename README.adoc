@@ -47,6 +47,9 @@ Delivery 3 :
 			When editing a conference from the GUI, the icalendar file is sent to a remote github repository
 			
 Delivery 4 :
+
 	Tasks :
-		Continue the History feature          
+	
+		Continue the History feature     
+		
 		Do the Peterhead feature
