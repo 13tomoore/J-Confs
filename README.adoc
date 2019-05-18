@@ -29,6 +29,7 @@ Delivery 1 :
 		8) Apply a Javadoc with defensive programming
 		9) Redefine some exception lifts that are too generic
 		10) Match an Icalendar file to a researcher
+		11) Button open on the gui and load a calendar.
 
 Delivery 2 :
 	Tasks :
