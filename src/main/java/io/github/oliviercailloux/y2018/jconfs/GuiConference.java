@@ -19,12 +19,15 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.slf4j.LoggerFactory;
+import com.google.common.base.Preconditions;
 
 
 
@@ -266,6 +269,21 @@ public class GuiConference {
 
 		});
 		
+		
+		Button btn_openCalendar= new Button(grp_researcher, SWT.NONE);
+		btn_openCalendar.setBounds(600, 260, 200, 25);
+		btn_openCalendar.setText("Open Calendar");
+		btn_openCalendar.addListener(SWT.Selection, new Listener() {
+			
+			@Override
+			public void handleEvent(Event event) {
+				Preconditions.checkArgument((txt_login.getText()!=""));
+				//checkcalendarexist(txt_login.getText()+".ics"); //to do
+				LOGGER.debug("click open calendar");
+				//GuiListConferences gulist=new GuiListConferences(txt_login.getText());
+			}
+		});
+
 		// create the label and the field text for the group conference
 		Label labelTitle = new Label(grp_conf, SWT.NONE);
 		labelTitle.setText("Title  ");

@@ -168,8 +168,8 @@ public class Conference {
 
 	@Override
 	public String toString() {
-		return "Conference [url=" + url + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", registrationFee=" + registrationFee + ", country=" + country+ "city = " + city +"]";
+		return "Url=" + url + ", Title=" + title + ", StartDate=" + startDate + ", EndDate=" + endDate
+				+ ", RegistrationFee=" + registrationFee + ", Country=" + country+ ", City = " + city +"";
 	}
 	
 	

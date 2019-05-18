@@ -1,6 +1,5 @@
 package io.github.oliviercailloux.y2018.jconfs;
 
-
 import java.util.Objects;
 
 import javax.ws.rs.client.Client;
@@ -15,6 +14,7 @@ import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSParser;
+
 
 
 
@@ -43,12 +43,22 @@ public class ResearcherBuilder {
 	 * @throws ClassCastException
 	 */
 	public static Researcher  create(String login) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException {
+	
 	Client client =ClientBuilder.newClient();
 	WebTarget webTarget=client.target("https://www.ent.dauphine.fr/annuaire/index.php?param0=fiche&param1="+login);
 	LOGGER.debug("webTarget initialisation succed");
 	String result=webTarget.request(MediaType.TEXT_PLAIN).get(String.class);
 	LOGGER.debug("request succed",result);
-
+	
+		
+	/*String result=""; //to Use were were are not at dauphine
+	 URL url = com.google.common.io.Resources.getResource("io/github/oliviercailloux/y2018/jconfs/FicheOlivierCailloux");
+	    try {
+	       result=com.google.common.io.Resources.toString(url, Charsets.UTF_8);
+	    } catch (IOException ex) {
+	        throw new RuntimeException(ex);
+	    }
+	*/
 	DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 	DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
 	
