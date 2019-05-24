@@ -16,6 +16,7 @@ public class Researcher {
 	private String office;
 	private String group;
 	private String mail;
+	
 
 	/**
 	 * this is a getter which return a surname
@@ -119,23 +120,25 @@ public class Researcher {
 		this.function = Objects.requireNonNull(function);
 	}
 
+
 	/**
-	 * 
-	 * This is a constructor which initializes the chercheur object
-	 * 
-	 * @param nom,
-	 *            not <code>null</code>.
-	 * @param prenom
-	 *            not <code>null</code>.
+	 * This is a constructor which initializes the searcher object
+	 * @param surname not <code>null</code>.
+	 * @param firstName not <code>null</code>.
+	 * @param function  
+	 * @param phone  
+	 * @param office 
+	 * @param mail 
+	 * @param group
 	 */
-	public Researcher(String surname, String firstName) {
+	public Researcher(String surname, String firstName, String function,String phone,String office, String mail, String group) {
 		this.surname = Objects.requireNonNull(surname);
 		this.firstName = Objects.requireNonNull(firstName);
-		this.function = "";
-		this.phone = "";
-		this.office = "";
-		this.mail = "";
-		this.group = "";
+		this.function = function;
+		this.phone = phone;
+		this.office = office;
+		this.mail = mail;
+		this.group = group;
 	}
 
 	@Override

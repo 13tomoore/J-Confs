@@ -44,6 +44,7 @@ public class GuiConference {
 	public static void main(String[]args){
 		Gui(new Display());
 	}
+	
 	public static void Gui(Display display){
 		final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GuiConference.class);
 		
@@ -486,8 +487,7 @@ public class GuiConference {
 				String surname = txt_Surname.getText();
 				String firstname = txt_Firstname.getText();
 				String email = txt_Mail.getText();
-				Researcher researcher = new Researcher(surname,firstname);
-				researcher.setMail(email);
+				Researcher researcher = new Researcher(surname,firstname, null, null, null, email, null );
 				String title = textTitle.getText();
 				Double fee = Double.parseDouble(textFee.getText());
 				String city = textCity.getText();
@@ -604,9 +604,8 @@ public class GuiConference {
 				String firstname = txt_Firstname.getText();
 				String email = txt_Mail.getText();
 				String phone  = txt_Phone.getText();
-				Researcher researcher = new Researcher(surname,firstname);
-				researcher.setMail(email);
-				researcher.setPhone(phone);
+				Researcher researcher = new Researcher(surname,firstname, null, phone,null,email,null);
+
 				String title = textTitle.getText();
 				Double fee = Double.parseDouble(textFee.getText());
 				String city = textCity.getText();

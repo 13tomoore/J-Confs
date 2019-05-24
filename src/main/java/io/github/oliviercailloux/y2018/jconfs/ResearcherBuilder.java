@@ -41,7 +41,8 @@ public class ResearcherBuilder {
 	 * @throws IllegalAccessException
 	 * @throws ClassCastException
 	 */
-	public static Researcher  create(String login) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException {
+	public static Researcher create(String login) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException {
+	
 	Client client =ClientBuilder.newClient();
 	WebTarget webTarget=client.target("https://www.ent.dauphine.fr/annuaire/index.php?param0=fiche&param1="+login);
 	LOGGER.debug("webTarget initialisation succed");
@@ -52,22 +53,23 @@ public class ResearcherBuilder {
 	DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
 	
 	LSParser builder = impl.createLSParser(DOMImplementationLS.MODE_SYNCHRONOUS, null);
+	
 	LSInput input= impl.createLSInput();
-
 	input.setStringData(result);
-
+	
 	Document doc=builder.parse(input);
 	LOGGER.debug("item created",doc);
-
-	String searcher=Objects.requireNonNull(doc.getElementsByTagName("h4").item(0).getFirstChild().getTextContent());
-	String  nom=searcher.split(" ")[1];
-	String prenom=searcher.split(" ")[0];
-	Researcher researcher=new Researcher(nom,prenom);
+	
 	NodeList listElements = doc.getElementsByTagName("li");
-	researcher.setFunction(Objects.requireNonNull(listElements.item(2).getFirstChild().getTextContent()));
-	researcher.setPhone(Objects.requireNonNull(listElements.item(4).getFirstChild().getTextContent().trim()));
-	researcher.setOffice(Objects.requireNonNull(listElements.item(8).getFirstChild().getTextContent().trim()));
-	researcher.setMail(Objects.requireNonNull(listElements.item(10).getFirstChild().getTextContent().trim()));
+	
+	String searcher=Objects.requireNonNull(doc.getElementsByTagName("h4").item(0).getFirstChild().getTextContent());
+	String nom=searcher.split(" ")[1];
+	String prenom=searcher.split(" ")[0];
+	String function = Objects.requireNonNull(listElements.item(2).getFirstChild().getTextContent());
+	String phone = Objects.requireNonNull(listElements.item(4).getFirstChild().getTextContent().trim());
+	String office = Objects.requireNonNull(listElements.item(8).getFirstChild().getTextContent().trim());
+	String mail = Objects.requireNonNull(listElements.item(10).getFirstChild().getTextContent().trim());
+	
 	listElements=doc.getElementsByTagName("a");
 	
 	String group="";
@@ -77,9 +79,9 @@ public class ResearcherBuilder {
 			group+="-";
 		group+=listElements.item(i).getFirstChild().getTextContent();
 		LOGGER.debug("group "+i+" added",group);
-
 	}
-	researcher.setGroup(group);
+	
+	Researcher researcher=new Researcher(nom,prenom, function, phone, office, mail, group);
 	return researcher;
 	}
 }
