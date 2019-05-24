@@ -1,7 +1,9 @@
 package io.github.oliviercailloux.y2018.jconfs;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.ParseException;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
@@ -17,6 +19,12 @@ import net.fortuna.ical4j.validate.ValidationException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Property;
 public class ConferenceWriter {
+	
+	public static boolean icsFileExists(String calFile) {
+		URL urlcalendar = ConferenceWriter.class.getResource(calFile+".ics");
+		return (urlcalendar!=null);
+	}
+	
 	/**
 	 * Write the conference in form calendar 
 	 * @param conference
