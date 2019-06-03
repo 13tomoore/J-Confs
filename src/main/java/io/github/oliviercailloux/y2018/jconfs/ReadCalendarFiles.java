@@ -29,7 +29,6 @@ public class ReadCalendarFiles {
 	/**
 	 * Parse an iCalendar object with ical4j API function took from source :
 	 * https://www.programcreek.com/java-api-examples/?api=net.fortuna.ical4j.model.property.Method
-	 * 
 	 * @param filePath
 	 * @throws IOException
 	 * @throws ParserException
@@ -55,24 +54,12 @@ public class ReadCalendarFiles {
 		}
 	}
 
-	/**
-	 * generate a localDate from string parametre This function is needed since the
-	 * ical4j property DTSTART is a string so we have to convert it into a localDate
-	 * format
-	 * 
-	 * @param date
-	 * @return LocalDate
-	 */
-	public static LocalDate stringToLocalDate(String date) {
-		return LocalDate.parse(date);
-	}
 
 	/**
 	 * Creates conference from ics file, function inspired by function
 	 * readCalendarFile
-	 * 
 	 * @param filepath
-	 * @return
+	 * @return conf
 	 * @throws IOException
 	 * @throws ParserException
 	 * @throws ParseException
@@ -93,12 +80,13 @@ public class ReadCalendarFiles {
 			conf = new Conference(confURL);
 
 			// add the others attributes
-			conf.setTitle(confCompo.getProperty("SUMMARY").getValue());
-			conf.setCountry(confCompo.getProperty("COUNTRY").getValue());
-			conf.setFeeRegistration(Double.parseDouble(confCompo.getProperty("FEE").getValue()));
-			conf.setStartDate(confCompo.getProperty("DTSTART").getValue());
-			conf.setEndDate(confCompo.getProperty("DTEND").getValue());
-			conf.setCity(confCompo.getProperty("CITY").getValue());
+			String title=confCompo.getProperty("SUMMARY").getValue();
+			String country=confCompo.getProperty("COUNTRY").getValue();
+			Double feeRegistration=Double.parseDouble(confCompo.getProperty("FEE").getValue());
+			String startDate =confCompo.getProperty("DTSTART").getValue();
+			String endDate= confCompo.getProperty("DTEND").getValue();
+			String city=confCompo.getProperty("CITY").getValue();
+			conf=new Conference(confURL,title,startDate,endDate,feeRegistration,country,city);
 		}
 		return conf;
 

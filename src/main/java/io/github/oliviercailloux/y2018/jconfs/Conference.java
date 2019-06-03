@@ -1,6 +1,5 @@
 package io.github.oliviercailloux.y2018.jconfs;
 import java.net.URL;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -10,6 +9,7 @@ import java.util.Objects;
 /**
  * @author huong,camille
  */
+
 public class Conference {
 	private URL url;
 	private String title;
@@ -18,6 +18,30 @@ public class Conference {
 	private Double registrationFee;
 	private String country;
 	private String city;
+	
+		
+	/**	 
+	 *  This is a constructor which initializes the conference object
+	 * @param url
+	 * @param title
+	 * @param startDate
+	 * @param endDate
+	 * @param registrationFee
+	 * @param country
+	 * @param city
+	 */
+	public Conference(URL url,String title,String startDate,String endDate,Double registrationFee, String country,String city){
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		this.url=url;
+		this.title=title;
+		this.startDate= LocalDate.parse(startDate, formatter);
+		this.endDate= LocalDate.parse(endDate, formatter);
+		this.registrationFee=registrationFee;
+		this.country=country;
+		this.city=city;
+	}
 	
 	/**
 	 * This is a getter which return the URL  	
@@ -36,30 +60,11 @@ public class Conference {
 	}
 
 	/**
-	 * This is a setter which set the title 	
-	 * @param title
-	 * @return 
-	 */
-	public void setTitle(String title) {
-		this.title = Objects.requireNonNull(title);
-	}
-
-	/**
 	 * This is a getter which return the date start  	
 	 * @return startDate
 	 */
 	public LocalDate getStartDate() {
 		return startDate;
-	}
-
-	/**
-	 * This is a setter which set the the date start  	
-	 * @param startDate
-	 * @throws ParseException 
-	 */
-	public void setStartDate(String startDate) throws ParseException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		this.startDate = LocalDate.parse(startDate, formatter);
 	}
 
 	/**
@@ -71,31 +76,12 @@ public class Conference {
 	}
 
 	/**
-	 * This is a setter which set the the date end  	
-	 * @param end_date
-	 * @throws ParseException 
-	 */
-	public void setEndDate( String endDate) throws ParseException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		this.endDate = LocalDate.parse(endDate, formatter);
-	}
-
-	/**
 	 * This is a getter which return the fee of registration	
 	 * @return registrationFee
 	 */
 	public Double getFeeRegistration() {
 		return registrationFee;
 	}
-
-	/**
-	 * This is a setter which set the fee of registration
-	 * @param registrationFee
-	 */
-	public void setFeeRegistration(Double registrationFee) {
-		this.registrationFee = Objects.requireNonNull(registrationFee);
-	}
-
 	
 	/**
 	 * This is a getter which return the country	
@@ -106,26 +92,11 @@ public class Conference {
 	}
 
 	/**
-	 * This is a setter which set the country
-	 * @param country
-	 */
-	public void setCountry(String country) {
-		this.country = Objects.requireNonNull(country);
-	}
-	
-	/**
 	 * This is a getter which return the city	
 	 * @return city
 	 */
 	public String getCity() {
 		return city;
-	}
-	/**
-	 * This is a setter which set the city
-	 * @param city
-	 */
-	public void setCity(String city) {
-		this.city = Objects.requireNonNull(city);
 	}
 	
 	/**

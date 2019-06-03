@@ -68,44 +68,36 @@ public class ConferenceReader {
 	 * @throws ParseException
 	 * @throws ValidationException
 	 */
-
 	public static Conference createConference(Reader read)
 			throws IOException, ParserException, ParseException, NumberFormatException {
-		Conference conf = null;
 
+		Conference conf;
 		CalendarBuilder builder = new CalendarBuilder();
 		Calendar calendar = builder.build(read);
 		Component confCompo = calendar.getComponent("X-CONFERENCE");
 
 		// the url is the primary key of a conference
 		URL confURL = new URL(confCompo.getProperty("URL").getValue());
-		conf = new Conference(confURL);
 
 		// add the others attributes
-		conf.setTitle(confCompo.getProperty("SUMMARY").getValue());
-		conf.setCountry(confCompo.getProperty("X-COUNTRY").getValue());
-		
-		
-		
+		String title=confCompo.getProperty("SUMMARY").getValue();
+		String country=confCompo.getProperty("X-COUNTRY").getValue();
+				
 		//convert DateTime pattern to LocalDate pattern
-
 		String stringDTSTART=confCompo.getProperty("X-DTSTART").getValue();
 		String stringDTEND=confCompo.getProperty("X-DTSTART").getValue();
 
-		
-		
 		DateTimeFormatter formatBefore=DateTimeFormatter.ofPattern("yyyyMMdd");
 		DateTimeFormatter formatAfter=DateTimeFormatter.ofPattern("dd/MM/yyy");
 		
 		LocalDate dtStart=LocalDate.parse(stringDTSTART,formatBefore);
 		LocalDate dtEnd=LocalDate.parse(stringDTEND,formatBefore);
+		String sdt=dtStart.format(formatAfter);
+		String edt= dtEnd.format(formatAfter);
+		Double feeRegistration=Double.parseDouble(confCompo.getProperty("X-FEE").getValue());
+		String city=confCompo.getProperty("X-CITY").getValue();
 		
-		conf.setStartDate(dtStart.format(formatAfter));
-		conf.setEndDate(dtEnd.format(formatAfter));
-		
-		conf.setFeeRegistration(Double.parseDouble(confCompo.getProperty("X-FEE").getValue()));
-		conf.setCity(confCompo.getProperty("X-CITY").getValue());
-	
+		conf = new Conference(confURL,title,sdt,edt,feeRegistration,country,city);
 		return conf;
 
 	}
