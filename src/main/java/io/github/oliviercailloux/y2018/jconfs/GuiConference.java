@@ -449,7 +449,7 @@ public class GuiConference {
 				} else {
 
 							try {
-								ConferenceWriter.writeCalendarFiles(title,conf);
+								ConferenceWriter.addConference(title,conf);
 								MessageBox mb = new MessageBox(shell, SWT.ICON_INFORMATION | SWT.OK);
 								mb.setText("Success");
 								mb.setMessage("The iCalendar has created in the file " + title + ".ics");

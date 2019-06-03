@@ -14,7 +14,7 @@ import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.CalendarComponent;
-import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.XComponent;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Summary;
@@ -50,7 +50,7 @@ public class ConferenceWriter {
 		return calendar;
 	}
 	
-	public static void deleteConference(String calFile, Conference conference) throws IOException, ParserException, NumberFormatException, ParseException, URISyntaxException, InvalidConferenceFormatException {
+	public static void deleteConference(String calFile, Conference conference) throws IOException, ParserException, URISyntaxException, InvalidConferenceFormatException {
 		
 		Calendar calendar = new Calendar();
 		Calendar newCalendar;
@@ -70,8 +70,11 @@ public class ConferenceWriter {
 				conflist.remove(i);
 			}
 		}
-		newCalendar=new Calendar(calendar);
-		try(FileOutputStream fout = new FileOutputStream(calFile+".ics")){
+		
+		newCalendar=new Calendar(conflist);
+		URL resourceUrl = ConferenceWriter.class.getResource(calFile+".ics");
+		File file = new File(resourceUrl.toURI());
+		try(FileOutputStream fout = new FileOutputStream(file)){
 			CalendarOutputter outputter = new CalendarOutputter();
 			outputter.setValidating(false);
 			outputter.output(newCalendar, fout);
@@ -91,7 +94,7 @@ public class ConferenceWriter {
 	 * @throws URISyntaxException
 	 */
 
-	public static void writeCalendarFiles(String calFile, Conference conference) throws ParseException, IOException, ParserException, ValidationException, URISyntaxException{
+	public static void addConference(String calFile, Conference conference) throws ParseException, IOException, ParserException, ValidationException, URISyntaxException{
 
 		Calendar calendar = new Calendar();
 
@@ -112,13 +115,16 @@ public class ConferenceWriter {
 		propertyList.add(new XProperty("X-CITY",conference.getCity().toString()));
 		propertyList.add(new Url(conference.getUrl().toURI()));
 		propertyList.add(new XProperty("X-FEE",conference.getFeeRegistration().toString()));
-
-		VEvent meeting = new VEvent(propertyList);
+		
+		XComponent meeting= new XComponent("X-CONFERENCE", propertyList);
 		//add event to the calendar
 		calendar.getComponents().add(meeting);
 
 		//Saving an iCalendar file
-		try(FileOutputStream fout = new FileOutputStream(calFile+".ics")){
+		URL resourceUrl = ConferenceWriter.class.getResource(calFile+".ics");
+		System.out.println(resourceUrl);
+		File file = new File(resourceUrl.toURI());
+		try(FileOutputStream fout = new FileOutputStream(file)){
 			CalendarOutputter outputter = new CalendarOutputter();
 			outputter.setValidating(false);
 			outputter.output(calendar, fout);

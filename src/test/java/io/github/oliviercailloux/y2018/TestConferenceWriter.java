@@ -34,7 +34,7 @@ public class TestConferenceWriter {
 		c.setStartDate("06/06/2019");
 		c.setTitle("Conf des gros bonnets");
 
-		ConferenceWriter.writeCalendarFiles("bof", c);
+		ConferenceWriter.addConference("bof", c);
 
 	}
 
