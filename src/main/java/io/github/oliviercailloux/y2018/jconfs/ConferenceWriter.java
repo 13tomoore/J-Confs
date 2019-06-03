@@ -50,7 +50,7 @@ public class ConferenceWriter {
 		return calendar;
 	}
 	
-	public static void deleteConference(String calFile, Conference conference) throws IOException, ParserException, NumberFormatException, ParseException, URISyntaxException {
+	public static void deleteConference(String calFile, Conference conference) throws IOException, ParserException, NumberFormatException, ParseException, URISyntaxException, InvalidConferenceFormatException {
 		
 		Calendar calendar = new Calendar();
 		Calendar newCalendar;
