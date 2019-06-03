@@ -74,16 +74,7 @@ public class ConferenceWriter {
 		}
 		
 		newCalendar=new Calendar(conflist);
-		URL resourceUrl = ConferenceWriter.class.getResource(calFile+".ics");
-		File file = new File(resourceUrl.toURI());
-		try(FileOutputStream fout = new FileOutputStream(file)){
-			CalendarOutputter outputter = new CalendarOutputter();
-			outputter.setValidating(false);
-			outputter.output(newCalendar, fout);
-			fout.close();	 
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
+		saveIcsFile(newCalendar, calFile);
 	}
 	
 	public static void addConference(String calFile, Conference conference) throws ParseException, IOException, ParserException, ValidationException, URISyntaxException{
@@ -115,18 +106,20 @@ public class ConferenceWriter {
 		calendar.getComponents().add(meeting);
 
 		//Saving an iCalendar file
+		saveIcsFile(calendar,calFile);
+	}
+	
+	private static void saveIcsFile(Calendar cal,String calFile) throws URISyntaxException {
 		URL resourceUrl = ConferenceWriter.class.getResource(calFile+".ics");
 		File file = new File(resourceUrl.toURI());
 		try(FileOutputStream fout = new FileOutputStream(file)){
 			CalendarOutputter outputter = new CalendarOutputter();
 			outputter.setValidating(false);
-			outputter.output(calendar, fout);
+			outputter.output(cal, fout);
 			fout.close();	 
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 }
 
