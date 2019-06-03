@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 
 import com.google.common.base.Preconditions;
 
@@ -67,6 +68,7 @@ public class ConferenceWriter {
 		for (int i=0;i<conflist.size();i++) {
 			temp=ConferenceReader.createConference(conflist.get(i));
 			if(temp.equals(conference)) {
+				System.out.println("indeed");
 				conflist.remove(i);
 			}
 		}
@@ -83,17 +85,7 @@ public class ConferenceWriter {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Write the conference in form calendar 
-	 * @param conference
-	 * @throws ParseException
-	 * @throws IOException
-	 * @throws ParserException
-	 * @throws ValidationException
-	 * @throws URISyntaxException
-	 */
-
+	
 	public static void addConference(String calFile, Conference conference) throws ParseException, IOException, ParserException, ValidationException, URISyntaxException{
 
 		Calendar calendar = new Calendar();
@@ -107,8 +99,10 @@ public class ConferenceWriter {
 
 		//Creating an event
 		PropertyList<Property> propertyList = new PropertyList<Property>();
-		propertyList.add(new XProperty("X-DTSTART",conference.getStartDate().toString()));
-		propertyList.add(new XProperty("X-DTEND",conference.getEndDate().toString()));
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		propertyList.add(new XProperty("X-DTSTART",conference.getStartDate().format(formatter)));
+		propertyList.add(new XProperty("X-DTEND",conference.getEndDate().format(formatter)));
 
 		propertyList.add(new Summary(conference.getTitle()));
 		propertyList.add(new XProperty("X-COUNTRY",conference.getCountry().toString()));
@@ -122,7 +116,6 @@ public class ConferenceWriter {
 
 		//Saving an iCalendar file
 		URL resourceUrl = ConferenceWriter.class.getResource(calFile+".ics");
-		System.out.println(resourceUrl);
 		File file = new File(resourceUrl.toURI());
 		try(FileOutputStream fout = new FileOutputStream(file)){
 			CalendarOutputter outputter = new CalendarOutputter();
