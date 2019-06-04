@@ -51,14 +51,18 @@ Team 2 : Nikola & Félix
 === Delivery 2 
 	* *Tasks TO DO*
 	    . The SM/PO rewrite the README.adoc of the project, with much more details about the task for "TASK TO DO" in the curent iteration. +
-	    Write a clean README.adoc with asciidoc format. 
+	    Write a clean README.adoc with asciidoc format. +
+	    => PR #13 SM/PO : link:https://github.com/jacquesmoati[Jacques MOATI]
 	    
 	    . Write an email @ __Jean-Christophe Gay__ asking him clear explanation of how to access to the intranet of the Université Paris-Dauphine +
-	    Write a file in asciidoc format rewriting the explaination @ __Olivier Cailloux__
+	    Write a file in asciidoc format rewriting the explaination @ __Olivier Cailloux__ +
+	    => SM/PO : link:https://github.com/jacquesmoati[Jacques MOATI]
 
-	    . Update JUnit 5 dependencies on the POM.xml
+	    . Update JUnit 5 dependencies on the POM.xml + 
+	    => *Warning : not done TOP PRIORITY FOR NEXT DELIVERY*
 	    
-	    . Resolve warnings (mostly unused libraries)
+	    . Resolve warnings (mostly unused libraries) 
+	    + => Mostly resolved on the PR #3 by the Team 2 of the Delivery 1 (__without considering warning before preference file installed __) 
 	    
 	    . Check if the Build Status on link:https://travis-ci.org/[Travis] is still working
 	    
@@ -71,21 +75,26 @@ Team 2 : Nikola & Félix
                 **   Conference
                 **   Geo
         . Apply the best practices using Guava on the existing code. +
-            e.g. for __equals__ method using Guava.
+            e.g. for __equals__ method using Guava. + 
+            => Next Delivery
         Code JUnit test for these classes :
                 *** ConferenceWriter
                 *** ConferencesShower
                 *** ReverseGeoCode
         
-        . Delete unused classes (such as IO, an empty class)
+        . Delete unused classes (such as IO, an empty class) +
+        => Next Delivery
         
         . Apply a Javadoc with defensive programming (preconditions).
         
-        . Redefine some raised exception that are too much generic.
+        . Redefine some raised exception that are too much generic. +
+        => PR #3 by the Team 2 of the Delivery 1
         
-        . Make a link between an ICalendar file and a researcher. 
+        . Make a link between an ICalendar file and a researcher. +
+        => Not important for the moment
         
-        . About refactoring : 
+        . About refactoring : + 
+        => PR #11 Team 1 : link:https://github.com/aliliKM[Alison KOUDOUSSOU MESSAN] & link:https://github.com/13tomoore[Tom MOORE]
         .. New constructors (using non Null)
         .. See and change automatique changes of bottow on the graphic interface
         .. Immuable Conference (delete setters)
@@ -93,13 +102,20 @@ Team 2 : Nikola & Félix
         
         . Check if we can execute the app using one single __main__
         
-        . Modify *ConferenceGUI* with the possibilities :
-        .. For the user to choose his ICalendar
-        .. Every conferences of this ICalendar should be displayed on the screen
-        .. Making possible editing a conference instead of Recreating/Deleting this conference
-        ..  Making possible to display a map with the location of a conference selected and being able to search about its itinary.
-        .. Writing and checking the __@annotations__
+        . Modify *ConferenceGUI* with the possibilities : 
+        .. For the user to choose his ICalendar +
+        => Not done 
+        .. Every conferences of this ICalendar should be displayed on the screen + 
+        => PR #14 Team 2 : link:https://github.com/feLlx[Félix Vitas] & link:https://github.com/nikolaspaci[Nikola SPACI]
+        .. Making possible editing a conference instead of Recreating/Deleting this conference + 
+        => PR #12 : Team 1 : link:https://github.com/aliliKM[Alison KOUDOUSSOU MESSAN] & link:https://github.com/13tomoore[Tom MOORE]
+        ..  Making possible to display a map with the location of a conference selected and being able to search about its itinary. + 
+        => PR #10 : Team 2 : link:https://github.com/feLlx[Félix Vitas] & link:https://github.com/nikolaspaci[Nikola SPACI]
+        .. Writing and checking the __@annotations__ + 
+        => Not done 
         
+        . Adding class diagram for the second delivery called Diagram (.ucls format only readable on eclipse) +
+        => PR #15 SM/PO : link:https://github.com/jacquesmoati[Jacques MOATI]
 
 
 === Delivery 3 
