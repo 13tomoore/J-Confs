@@ -1,8 +1,11 @@
 package io.github.oliviercailloux.y2018.jconfs;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import com.google.common.base.MoreObjects;
 
 
 
@@ -17,8 +20,7 @@ public class Conference {
 	private LocalDate endDate;
 	private Double registrationFee;
 	private String country;
-	private String city;
-	
+	private String city;	
 		
 	/**	 
 	 *  This is a constructor which initializes the conference object
@@ -33,7 +35,6 @@ public class Conference {
 	public Conference(URL url,String title,String startDate,String endDate,Double registrationFee, String country,String city){
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
 		this.url=url;
 		this.title=title;
 		this.startDate= LocalDate.parse(startDate, formatter);
@@ -45,7 +46,7 @@ public class Conference {
 	
 	/**
 	 * This is a getter which return the URL  	
-	 * @return url
+	 * @return not <code>null</code>
 	 */
 	public URL getUrl() {
 		return url;
@@ -53,19 +54,21 @@ public class Conference {
 
 	/**
 	 * This is a getter which return the title  	
-	 * @return title
+	 * @return not <code>null</code>
 	 */
 	public String getTitle() {
 		return title;
 	}
 
+
 	/**
 	 * This is a getter which return the date start  	
-	 * @return startDate
+	 * @return not <code>null</code>
 	 */
 	public LocalDate getStartDate() {
 		return startDate;
 	}
+
 
 	/**
 	 * This is a getter which return the date end 	
@@ -82,7 +85,7 @@ public class Conference {
 	public Double getFeeRegistration() {
 		return registrationFee;
 	}
-	
+
 	/**
 	 * This is a getter which return the country	
 	 * @return country
@@ -91,6 +94,7 @@ public class Conference {
 		return country;
 	}
 
+
 	/**
 	 * This is a getter which return the city	
 	 * @return city
@@ -98,25 +102,23 @@ public class Conference {
 	public String getCity() {
 		return city;
 	}
-	
+
 	/**
 	 * This is a constructor which initializes the conference object 
 	 * @param url primary key
+	 * 			not <code>null</code>
 	 */
 	public Conference(URL url) {
 		this.url =Objects.requireNonNull(url);
-		this.title =new String("");
+		this.title ="";
 		this.startDate = LocalDate.now();
 		this.endDate = LocalDate.now();
 		this.registrationFee = 0.0;
 		this.country = "";
 		this.city="";
 	}
-	
+
 	@Override
-	/**
-	 * Compare the conference to object by comparing all attributes 
-	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof Conference) {
 			Conference conference2 = (Conference) obj;
@@ -131,6 +133,7 @@ public class Conference {
 		}
 		return false;
 	}
+
 	@Override
 	public int hashCode(){
 		return Objects.hash(url,title,registrationFee,startDate,endDate,country,city);
@@ -139,11 +142,15 @@ public class Conference {
 
 	@Override
 	public String toString() {
-		return "Conference [url=" + url + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", registrationFee=" + registrationFee + ", country=" + country+ "city = " + city +"]";
+		return MoreObjects.toStringHelper(this)
+				.add("url", url)
+				.add("title", title)
+				.add("startDate", startDate)
+				.add("endDate", endDate)
+				.add("registrationFee", registrationFee)
+				.add("country", country)
+				.add("city", city)
+				.toString();
 	}
-	
-	
-	
 
 }

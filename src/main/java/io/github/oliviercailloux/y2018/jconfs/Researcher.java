@@ -2,6 +2,8 @@ package io.github.oliviercailloux.y2018.jconfs;
 
 import java.util.Objects;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * this class allows to stock a researcher
  *
@@ -9,7 +11,7 @@ import java.util.Objects;
 
 public class Researcher {
 
-	private String surname;
+	private String lastName;
 	private String firstName;
 	private String function;
 	private String phone;
@@ -19,85 +21,85 @@ public class Researcher {
 	
 
 	/**
-	 * this is a getter which return a surname
-	 * 
-	 * @return nom not <code>null</code>.
+	 * this is a getter which return a lastName
+	 * @return not <code>null</code>
 	 */
-	public String getSurname() {
-		return surname;
+	public String getLastname() {
+		return lastName;
 	}
 
 	/**
-	 * this is a setter which allows to set the name not <code>null</code>.
-	 * 
-	 * @param surname
+	 * this is a setter which allows to set the name 
+	 * @param lastName
+	 *            not <code>null</code>
 	 */
-	public void setSurname(String surname) {
-		this.surname = Objects.requireNonNull(surname);
+	public void setLastname(String lastName) {
+		this.lastName = Objects.requireNonNull(lastName);
 	}
 
 	/**
-	 * @return firstName not <code>null</code>.
+	 * @return not <code>null</code>
 	 */
 	public String getFirstname() {
 		return firstName;
 	}
 
 	/**
-	 * @param fistName
-	 *            not <code>null</code>.
+	 * @param firstName
+	 *            not <code>null</code>
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = Objects.requireNonNull(firstName);
 	}
 
 	/**
-	 * @return telephone not <code>null</code>.
+	 * @return not <code>null</code>
 	 */
 	public String getPhone() {
 		return phone;
 	}
 
 	/**
-	 * @param telephone
-	 *            not <code>null</code>.
+	 * @param phone
+	 *            not <code>null</code>
 	 */
 	public void setPhone(String phone) {
 		this.phone = Objects.requireNonNull(phone);
 	}
 
 	/**
-	 * @return bureau not <code>null</code>.
+	 * @return not <code>null</code>
 	 */
 	public String getOffice() {
 		return office;
 	}
 
 	/**
-	 * @param bureau
-	 *            not <code>null</code>.
+	 * @param office
+	 *            not <code>null</code>
 	 */
 	public void setOffice(String office) {
 		this.office = Objects.requireNonNull(office);
 	}
 
 	/**
-	 * @return groupe not <code>enull</code>.
+	 * @return not <code>null</code>
 	 */
 	public String getGroup() {
 		return group;
 	}
 
 	/**
-	 * @param groupe
-	 *            not <code>null</code>.
+	 * @param group
+	 *            not <code>null</code>
 	 */
 	public void setGroup(String group) {
 		this.group = Objects.requireNonNull(group);
 	}
 
+
 	/**
-	 * @return mail not <code>null</code>.
+	 * @return not <code>null</code>
 	 */
 	public String getMail() {
 		return mail;
@@ -105,7 +107,7 @@ public class Researcher {
 
 	/**
 	 * @param mail
-	 *            not <code>null</code>.
+	 *            not <code>null</code>
 	 */
 	public void setMail(String mail) {
 		this.mail = Objects.requireNonNull(mail);
@@ -113,8 +115,8 @@ public class Researcher {
 
 	/**
 	 * 
-	 * @param fonctioon
-	 *            not<code>null</code>.
+	 * @param function
+	 *            not<code>null</code>
 	 */
 	public void setFunction(String function) {
 		this.function = Objects.requireNonNull(function);
@@ -122,6 +124,7 @@ public class Researcher {
 
 
 	/**
+<<<<<<< HEAD
 	 * This is a constructor which initializes the searcher object
 	 * @param surname not <code>null</code>.
 	 * @param firstName not <code>null</code>.
@@ -131,8 +134,8 @@ public class Researcher {
 	 * @param mail 
 	 * @param group
 	 */
-	public Researcher(String surname, String firstName, String function,String phone,String office, String mail, String group) {
-		this.surname = Objects.requireNonNull(surname);
+	public Researcher(String lastName, String firstName, String function,String phone,String office, String mail, String group) {
+		this.lastName = Objects.requireNonNull(lastName);
 		this.firstName = Objects.requireNonNull(firstName);
 		this.function = function;
 		this.phone = phone;
@@ -143,8 +146,14 @@ public class Researcher {
 
 	@Override
 	public String toString() {
-		return "nom: " + this.surname + " prenom: " + this.firstName + " fonction: " + this.function + " telephone: "
-				+ this.phone + " bureau: " + this.office + " mail: " + mail + " groupe: " + this.group;
-
+		return MoreObjects.toStringHelper(this)
+				.add("lastName", lastName)
+				.add("firstName", firstName)
+				.add("function", function)
+				.add("phone", phone)
+				.add("office", office)
+				.add("mail", mail)
+				.add("group", group)
+				.toString();
 	}
 }
