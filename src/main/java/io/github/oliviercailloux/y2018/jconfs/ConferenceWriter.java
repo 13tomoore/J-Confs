@@ -31,7 +31,7 @@ import net.fortuna.ical4j.model.Property;
 public class ConferenceWriter {
 
 	/**
-	 * Return true if there is an ics file named @param calFile in resources, else false
+	 * Return true if there is an ics file named calFile in resources, else false
 	 * @param calFile
 	 *            not <code>null</code>.
 	 * @return

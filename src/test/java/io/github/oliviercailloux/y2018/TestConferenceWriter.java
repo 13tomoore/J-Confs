@@ -3,6 +3,7 @@ package io.github.oliviercailloux.y2018;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
@@ -17,7 +18,7 @@ import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.validate.ValidationException;
 
 public class TestConferenceWriter {
-
+	
 	@Test
 	public void testFileExists() {
 		assertEquals(ConferenceWriter.icsFileExists("threeConferences"),true);

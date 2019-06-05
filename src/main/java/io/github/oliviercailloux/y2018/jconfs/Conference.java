@@ -155,7 +155,7 @@ public class Conference {
 			
 			if (title.equals(conference2.title) && url.equals(conference2.url)
 					&& startDate.equals(conference2.startDate) && endDate.equals(conference2.endDate)
-					&& Double.compare(registrationFee, conference2.registrationFee)==0 && city.equals(conference2.city)
+					&& registrationFee.equals(conference2.registrationFee) && city.equals(conference2.city)
 					&& country.equals(conference2.country)) {
 				return true;
 			}
