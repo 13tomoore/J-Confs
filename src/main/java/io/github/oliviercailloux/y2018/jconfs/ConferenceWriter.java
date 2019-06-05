@@ -1,5 +1,6 @@
 package io.github.oliviercailloux.y2018.jconfs;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import com.google.common.base.Preconditions;
 
@@ -28,21 +30,43 @@ import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.Property;
 public class ConferenceWriter {
 
+	/**
+	 * Return true if there is an ics file named @param calFile in resources, else false
+	 * @param calFile
+	 *            not <code>null</code>.
+	 * @return
+	 */
 	public static boolean icsFileExists(String calFile) {
-		Preconditions.checkNotNull(calFile);
+		Objects.requireNonNull(calFile);
 		URL urlcalendar = ConferenceWriter.class.getResource(calFile+".ics");
 		return (urlcalendar!=null);
 	}
 
+	/**
+	 * Open the specified ics file as an Calendar object
+	 * @param calFile
+	 *            not <code>null</code>.
+	 * @return
+	 *            not <code>null</code>.
+	 * @throws IOException
+	 * @throws ParserException
+	 */
 	private static Calendar openCalendar(String calFile) throws IOException, ParserException {
-		Preconditions.checkNotNull(calFile);
+		Objects.requireNonNull(calFile);
 		URL urlcalendar = ConferenceWriter.class.getResource(calFile+".ics");
-		FileReader reader=new FileReader(new File(urlcalendar.getFile()));
+		try(FileReader reader=new FileReader(new File(urlcalendar.getFile()))){
 		CalendarBuilder builder = new CalendarBuilder();
 		Calendar calendar = builder.build(reader);
+		reader.close();
 		return calendar;
+		}		
 	}
 
+	/**
+	 * Create a Calendar object with special properties
+	 * @return
+	 *            not <code>null</code>.
+	 */
 	private static Calendar createCalendar() {
 		Calendar calendar = new Calendar();
 		calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
@@ -51,12 +75,26 @@ public class ConferenceWriter {
 		return calendar;
 	}
 	
-	public static void deleteConference(String calFile, Conference conference) throws IOException, ParserException, URISyntaxException, InvalidConferenceFormatException {
+	/**
+	 * Delete @param conference if it is in the ics file named @param calFile 
+	 * If there is no ics file named @param calFile, method creates it
+	 * @param calFile
+	 *            not <code>null</code>.	
+	 * @param conference
+	 *            not <code>null</code>.
+	 * @throws IOException
+	 * @throws ParserException
+	 * @throws URISyntaxException
+	 * @throws InvalidConferenceFormatException
+	 */
+	public static void deleteConference(String calFile, Conference conference) throws IOException, ParserException, URISyntaxException, InvalidConferenceFormatException { 
+		Objects.requireNonNull(calFile);
+		Objects.requireNonNull(conference);
 		
 		Calendar calendar = new Calendar();
 		Calendar newCalendar;
 		
-		Conference temp;
+		Conference tempConf;
 		if(icsFileExists(calFile)) {
 			calendar=openCalendar(calFile);
 		}
@@ -64,21 +102,34 @@ public class ConferenceWriter {
 			calendar=createCalendar();
 		}
 		
-		ComponentList<CalendarComponent> conflist=calendar.getComponents("X-CONFERENCE");
-		for (int i=0;i<conflist.size();i++) {
-			temp=ConferenceReader.createConference(conflist.get(i));
-			if(temp.equals(conference)) {
-				System.out.println("indeed");
-				conflist.remove(i);
+		ComponentList<CalendarComponent> confList=calendar.getComponents("X-CONFERENCE");
+		for (int i=0;i<confList.size();i++) {
+			tempConf=ConferenceReader.createConference(confList.get(i));
+			if(tempConf.equals(conference)) {
+				confList.remove(i);
 			}
 		}
 		
-		newCalendar=new Calendar(conflist);
+		newCalendar=new Calendar(confList);
 		saveIcsFile(newCalendar, calFile);
 	}
 	
-	public static void addConference(String calFile, Conference conference) throws ParseException, IOException, ParserException, ValidationException, URISyntaxException{
-
+	/**
+	 * Add @param conference in the ics file named @param calFile 
+	 * If there is no ics file named @param calFile, method creates it
+	 * @param calFile
+	 *            not <code>null</code>.
+	 * @param conference
+	 *            not <code>null</code>.
+	 * @throws IOException
+	 * @throws ParserException
+	 * @throws ValidationException
+	 * @throws URISyntaxException
+	 */
+	public static void addConference(String calFile, Conference conference) throws IOException, ParserException, ValidationException, URISyntaxException{
+		Objects.requireNonNull(calFile);
+		Objects.requireNonNull(conference);
+		
 		Calendar calendar = new Calendar();
 
 		if(icsFileExists(calFile)) {
@@ -89,7 +140,7 @@ public class ConferenceWriter {
 		}
 
 		//Creating an event
-		PropertyList<Property> propertyList = new PropertyList<Property>();
+		PropertyList<Property> propertyList = new PropertyList<>();
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		propertyList.add(new XProperty("X-DTSTART",conference.getStartDate().format(formatter)));
@@ -109,17 +160,28 @@ public class ConferenceWriter {
 		saveIcsFile(calendar,calFile);
 	}
 	
-	private static void saveIcsFile(Calendar cal,String calFile) throws URISyntaxException {
+	/**
+	 * Save the given conference in the ics File named @param calFile
+	 * @param cal
+	 *            not <code>null</code>.
+	 * @param calFile
+	 *            not <code>null</code>.
+	 * @throws URISyntaxException
+	 * @throws ValidationException
+	 * @throws IOException
+	 */
+	private static void saveIcsFile(Calendar cal,String calFile) throws URISyntaxException, ValidationException, IOException {
+		Objects.requireNonNull(calFile);
+		Objects.requireNonNull(cal);
+		
 		URL resourceUrl = ConferenceWriter.class.getResource(calFile+".ics");
 		File file = new File(resourceUrl.toURI());
 		try(FileOutputStream fout = new FileOutputStream(file)){
-			CalendarOutputter outputter = new CalendarOutputter();
-			outputter.setValidating(false);
-			outputter.output(cal, fout);
-			fout.close();	 
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
+		CalendarOutputter outputter = new CalendarOutputter();
+		outputter.setValidating(false);
+		outputter.output(cal, fout);
+		fout.close();
+		}		
 	}
 }
 

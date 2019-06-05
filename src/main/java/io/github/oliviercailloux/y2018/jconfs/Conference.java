@@ -3,6 +3,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 import com.google.common.base.MoreObjects;
@@ -59,7 +60,7 @@ public class Conference {
 	 * @param startDate
 	 * @throws ParseException 
 	 */
-	public void setStartDate(String startDate) throws ParseException {
+	public void setStartDate(String startDate) throws DateTimeParseException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		this.startDate = LocalDate.parse(startDate, formatter);
 	}
@@ -77,7 +78,7 @@ public class Conference {
 	 * @param end_date
 	 * @throws ParseException 
 	 */
-	public void setEndDate( String endDate) throws ParseException {
+	public void setEndDate( String endDate) throws DateTimeParseException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		this.endDate = LocalDate.parse(endDate, formatter);
 	}

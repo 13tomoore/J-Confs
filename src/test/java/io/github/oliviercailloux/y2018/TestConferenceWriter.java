@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class TestConferenceWriter {
 	}
 
 	@Test
-	public void TestAddConf() throws ParseException, ValidationException, IOException, ParserException, URISyntaxException {
+	public void TestAddConf() throws DateTimeParseException, ValidationException, IOException, ParserException, URISyntaxException {
 		URL u =new URL("http://example.com/");
 		Conference c = new Conference(u);
 		c.setCity("Paris");
@@ -40,7 +41,7 @@ public class TestConferenceWriter {
 	}
 	
 	@Test
-	public void TestDeleteConf() throws ParseException, ValidationException, IOException, ParserException, URISyntaxException, InvalidConferenceFormatException {
+	public void TestDeleteConf() throws DateTimeParseException, ValidationException, IOException, ParserException, URISyntaxException, InvalidConferenceFormatException {
 		URL u =new URL("http://example.com/");
 		Conference c = new Conference(u);
 		c.setCity("Paris");
