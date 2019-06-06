@@ -57,7 +57,6 @@ public class ConferenceWriter {
 		try(FileReader reader=new FileReader(new File(urlcalendar.getFile()))){
 		CalendarBuilder builder = new CalendarBuilder();
 		Calendar calendar = builder.build(reader);
-		reader.close();
 		return calendar;
 		}		
 	}
@@ -180,7 +179,6 @@ public class ConferenceWriter {
 		CalendarOutputter outputter = new CalendarOutputter();
 		outputter.setValidating(false);
 		outputter.output(cal, fout);
-		fout.close();
 		}		
 	}
 }
