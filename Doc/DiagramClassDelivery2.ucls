@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="io.github.oliviercailloux.y2018.jconfs.ResearcherBuilder" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ResearcherBuilder.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="169" x="206" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="io.github.oliviercailloux.y2018.jconfs.Download" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/Download.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="169" x="415" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="io.github.oliviercailloux.y2018.jconfs.GenerateOM" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/GenerateOM.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="173" width="342" x="624" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="io.github.oliviercailloux.y2018.jconfs.InvalidConferenceFormatException" 
+    project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/InvalidConferenceFormatException.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="309" x="1006" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="io.github.oliviercailloux.y2018.jconfs.Conference" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/Conference.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="497" width="197" x="5786" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="io.github.oliviercailloux.y2018.jconfs.ReadCalendarFiles" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ReadCalendarFiles.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="227" x="1355" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="io.github.oliviercailloux.y2018.jconfs.ConferencesRetriever" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ConferencesRetriever.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="283" x="1791" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="io.github.oliviercailloux.y2018.jconfs.ConferencesShower" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ConferencesShower.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="298" x="1622" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="io.github.oliviercailloux.y2018.jconfs.GuiConference" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/GuiConference.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="169" x="2283" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="io.github.oliviercailloux.y2018.jconfs.Researcher" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/Researcher.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="461" width="169" x="2492" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="io.github.oliviercailloux.y2018.jconfs.setCoordinates" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/setCoordinates.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="242" x="2701" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="io.github.oliviercailloux.y2018.jconfs.ConferenceReader" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ConferenceReader.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="263" x="2983" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="io.github.oliviercailloux.y2018.jconfs.MissionOrder" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/MissionOrder.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="119" width="230" x="3286" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="io.github.oliviercailloux.y2018.jconfs.PathStep" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/PathStep.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="263" width="230" x="5516" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="15" language="java" name="io.github.oliviercailloux.y2018.jconfs.TransportType" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/TransportType.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="209" width="262" x="5484" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="16" language="java" name="io.github.oliviercailloux.y2018.jconfs.GenerateOMYS" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/GenerateOMYS.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="173" width="358" x="3556" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="io.github.oliviercailloux.y2018.jconfs.IO" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/IO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="101" width="169" x="3954" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="io.github.oliviercailloux.y2018.jconfs.GuiListConferences" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/GuiListConferences.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="155" width="169" x="5786" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="io.github.oliviercailloux.y2018.jconfs.MapGUI" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/MapGUI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="371" width="599" x="4163" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="io.github.oliviercailloux.y2018.jconfs.ConferencesFromICal" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ConferencesFromICal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="283" x="1960" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="io.github.oliviercailloux.y2018.jconfs.Main" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="101" width="169" x="4802" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="io.github.oliviercailloux.y2018.jconfs.ConferenceWriter" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/ConferenceWriter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="256" x="5011" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="io.github.oliviercailloux.y2018.jconfs.GeneralGUI" project="J-Confs" 
+    file="/J-Confs/src/main/java/io/github/oliviercailloux/y2018/jconfs/GeneralGUI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="83" width="169" x="5307" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="24">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="25">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="26" name="listeconfuser"/>      
+      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="29" name="retriever"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="32" name="type"/>      
+      <multiplicity id="33" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
