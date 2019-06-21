@@ -1,5 +1,6 @@
 package io.github.oliviercailloux.y2018;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -8,9 +9,16 @@ import java.util.Iterator;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import com.github.caldav4j.exceptions.CalDAV4JException;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.Test;
-import org.osaf.caldav4j.exceptions.CalDAV4JException;
 import io.github.oliviercailloux.y2018.jconfs.CalendarOnline;
 import io.github.oliviercailloux.y2018.jconfs.Conference;
 import io.github.oliviercailloux.y2018.jconfs.InvalidConferenceFormatException;
@@ -23,7 +31,7 @@ import net.fortuna.ical4j.model.property.DtStart;
 public class TestCalendarOnline {
 
 	@Test
-	public void testGetOnlineConferenceFromUid() throws CalDAV4JException, InvalidConferenceFormatException {
+	public void testGetOnlineConferenceFromUid() throws CalDAV4JException, InvalidConferenceFormatException{
 		CalendarOnline instanceCalendarOnline=CalendarOnline.getInstance();
 		Conference conferenceFound;
 		String uidSearch="4e14d618-1d93-40a3-adb9-3c01dca8ee67";
@@ -37,7 +45,7 @@ public class TestCalendarOnline {
 	}
 	
 	@Test
-	public void testGetAllOnlineConferences() throws CalDAV4JException, InvalidConferenceFormatException {
+	public void testGetAllOnlineConferences() throws  InvalidConferenceFormatException,CalDAV4JException {
 		CalendarOnline instanceCalendarOnline=CalendarOnline.getInstance();
 		Set<Conference> collectionConferences=instanceCalendarOnline.getOnlineConferences();
 		Iterator<Conference> iteratorConf=collectionConferences.iterator();
@@ -48,7 +56,7 @@ public class TestCalendarOnline {
 	}
 	
 	@Test
-	public void testConferenceToVEvent() throws URISyntaxException, ParseException, MalformedURLException {
+	public void testConferenceToVEvent() throws URISyntaxException, ParseException, IOException {
 		VEvent conferenceVEvent;
 		CalendarOnline instanceCalendarOnline=CalendarOnline.getInstance();
 		Conference conference=new Conference(new URL("http://fruux.com"));
@@ -69,5 +77,5 @@ public class TestCalendarOnline {
 		assertTrue(conferenceVEvent.getProperty(Property.DTSTART).equals(startDate));
 		assertTrue(conferenceVEvent.getProperty(Property.DTEND).equals(endDate));
 	}
-
+		
 }

@@ -2,6 +2,32 @@ package io.github.oliviercailloux.y2018.jconfs;
 
 import java.util.List;
 import java.util.Set;
+
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import com.github.caldav4j.CalDAVCollection;
+import com.github.caldav4j.CalDAVConstants;
+import com.github.caldav4j.exceptions.CalDAV4JException;
+import com.github.caldav4j.methods.CalDAV4JMethodFactory;
+import com.github.caldav4j.model.request.CalendarQuery;
+import com.github.caldav4j.util.GenerateQuery;
+import com.github.caldav4j.util.ICalendarUtils;
+
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.rmi.server.UID;
 import java.text.ParseException;
@@ -24,41 +50,28 @@ import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 
-import org.apache.commons.httpclient.HostConfiguration;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.osaf.caldav4j.CalDAVCollection;
-import org.osaf.caldav4j.CalDAVConstants;
-import org.osaf.caldav4j.exceptions.CalDAV4JException;
-import org.osaf.caldav4j.methods.CalDAV4JMethodFactory;
-import org.osaf.caldav4j.methods.HttpClient;
-import org.osaf.caldav4j.model.request.CalendarQuery;
-import org.osaf.caldav4j.util.GenerateQuery;
-import org.osaf.caldav4j.util.ICalendarUtils;
-
 /**
- * @author nikola
- * This class permits to access to online conferences from https://fruux.com
+ * @author nikola 
+ * This class permits to access to online conferences from
+ * https://fruux.com
  */
 public class CalendarOnline {
 	final private static String userNameFruux = "b3297431258";
 	final private static String passwordFruux = "jizbr5fuj9gi";
 	final private static String calendarIDFruux = "6e8c6372-eba5-43da-9eed-8e5413559c99";
-	private static HttpClient httpClient;
 	private static CalendarOnline instanceCalendarOnline;
 	private CalDAVCollection collectionCalendarsOnline;
-	
+	private static CloseableHttpClient httpclient;
+
 	private CalendarOnline() {
-		httpClient = new HttpClient();
-		httpClient.getHostConfiguration().setHost("dav.fruux.com", 443, "https");
-		UsernamePasswordCredentials httpCredentials = new UsernamePasswordCredentials(userNameFruux, passwordFruux);
-		httpClient.getState().setCredentials(AuthScope.ANY, httpCredentials);
-		httpClient.getParams().setAuthenticationPreemptive(true);
-		
-		collectionCalendarsOnline = new CalDAVCollection(
-				"/calendars/" + userNameFruux + "/" + calendarIDFruux,
-				(HostConfiguration) httpClient.getHostConfiguration().clone(), new CalDAV4JMethodFactory(),
-				CalDAVConstants.PROC_ID_DEFAULT);
+		HttpHost hostTarget;
+		CredentialsProvider credsProvider = new BasicCredentialsProvider();
+		credsProvider.setCredentials(new AuthScope("dav.fruux.com", 443),
+				new UsernamePasswordCredentials(userNameFruux, passwordFruux));
+		httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
+		hostTarget = new HttpHost("dav.fruux.com", 443, "https");
+		collectionCalendarsOnline = new CalDAVCollection("/calendars/" + userNameFruux + "/" + calendarIDFruux, hostTarget,
+				new CalDAV4JMethodFactory(), CalDAVConstants.PROC_ID_DEFAULT);
 	}
 
 	public static CalendarOnline getInstance() {
@@ -80,7 +93,7 @@ public class CalendarOnline {
 	public Set<Conference> getOnlineConferences() throws CalDAV4JException, InvalidConferenceFormatException {
 		GenerateQuery searchQuery = new GenerateQuery();
 		CalendarQuery calendarQuery = searchQuery.generate();
-		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpClient, calendarQuery);
+		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpclient, calendarQuery);
 		Set<Conference> listConferencesUser = new LinkedHashSet<>();
 		for (Calendar calendar : calendarsResult) {
 			ComponentList<VEvent> componentList = calendar.getComponents(Component.VEVENT);
@@ -93,17 +106,20 @@ public class CalendarOnline {
 		return listConferencesUser;
 	}
 
-	/** Method that upload online the conference that has been modified by a user
+	/**
+	 * Method that upload online the conference that has been modified by a user
+	 * 
 	 * @param conferenceEdited
 	 * @throws ParseException
 	 * @throws CalDAV4JException
 	 * @throws URISyntaxException
 	 */
-	public void editConferenceOnline(Conference conferenceEdited) throws ParseException, CalDAV4JException, URISyntaxException {
-			VEvent vEventConferenceModified=conferenceToVEvent(conferenceEdited);
-			collectionCalendarsOnline.updateMasterEvent(httpClient, vEventConferenceModified, null);
-		}
-	
+	public void editConferenceOnline(Conference conferenceEdited)
+			throws ParseException, CalDAV4JException, URISyntaxException {
+		VEvent vEventConferenceModified = conferenceToVEvent(conferenceEdited);
+		collectionCalendarsOnline.updateMasterEvent(httpclient, vEventConferenceModified, null);
+	}
+
 	/**
 	 * @param conferenceEdited : the conference you want to convert
 	 * @return the VEvent corresponding to your Conference
@@ -118,7 +134,7 @@ public class CalendarOnline {
 		Property name = new Summary(conferenceEdited.getTitle());
 		Property startDate = new DtStart(conferenceEdited.getEndDate().toString());
 		Property endDate = new DtEnd(conferenceEdited.getStartDate().toString());
-		Property uid=new Uid(conferenceEdited.getUid());
+		Property uid = new Uid(conferenceEdited.getUid());
 		PropertyList<Property> propertyListVevent = new PropertyList<>();
 		propertyListVevent.add(url);
 		propertyListVevent.add(name);
@@ -130,9 +146,10 @@ public class CalendarOnline {
 		vEventConference = new VEvent(propertyListVevent);
 		return vEventConference;
 	}
-	
+
 	/**
 	 * Recovery of an VEvent by his UID
+	 * 
 	 * @param uid
 	 * @return The VEvent that have this uid
 	 * @throws CalDAV4JException
@@ -141,13 +158,13 @@ public class CalendarOnline {
 	public Conference getConferenceFromUid(String uid) throws CalDAV4JException, InvalidConferenceFormatException {
 		VEvent vEventConferenceFound = null;
 		GenerateQuery searchQuery = new GenerateQuery();
-		searchQuery.setFilter("VEVENT : UID=="+uid);
+		searchQuery.setFilter("VEVENT : UID==" + uid);
 		CalendarQuery calendarQuery = searchQuery.generate();
-		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpClient, calendarQuery);
-		for (Calendar calendar: calendarsResult) {
-			vEventConferenceFound=ICalendarUtils.getFirstEvent(calendar);
+		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpclient, calendarQuery);
+		for (Calendar calendar : calendarsResult) {
+			vEventConferenceFound = ICalendarUtils.getFirstEvent(calendar);
 		}
 		return ConferenceReader.createConference(vEventConferenceFound);
 	}
-	
+
 }
