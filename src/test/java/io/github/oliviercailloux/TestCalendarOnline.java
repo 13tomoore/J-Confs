@@ -26,17 +26,17 @@ import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.util.RandomUidGenerator;
  
 public class TestCalendarOnline {
- 
+	@Test
     public void testGetOnlineConferenceFromUid() throws InvalidConferenceFormatException, CalDAV4JException {
         CalendarOnline instanceCalendarOnline = CalendarOnline.getInstance();
         Conference conferenceFound;
-        String uidSearch = "4e14d618-1d93-40a3-adb9-3c01dca8ee67";
+        String uidSearch = "7aa11ba6-e6d7-452e-b60c-8d50a5520107";
         conferenceFound = instanceCalendarOnline.getConferenceFromUid(uidSearch);
-        assertEquals(conferenceFound.getTitle(), "Third iteration JAVA");
+        assertEquals(conferenceFound.getTitle(), "Java presentation");
         assertEquals(conferenceFound.getUid(), uidSearch);
         assertEquals(conferenceFound.getCity(), "Paris");
         assertEquals(conferenceFound.getCountry(), "France");
-        assertEquals(conferenceFound.getStartDate().toString(), "2019-06-21");
+        assertEquals(conferenceFound.getStartDate().toString(), "2019-07-01");
         assertEquals(conferenceFound.getFeeRegistration().toString(), "1.46");
     }
  
