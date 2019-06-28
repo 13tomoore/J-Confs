@@ -34,8 +34,10 @@ import io.github.oliviercailloux.jconfs.conference.InvalidConferenceFormatExcept
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.rmi.server.UID;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -46,12 +48,14 @@ import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.DtEnd;
+import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.Name;
 import net.fortuna.ical4j.model.property.Summary;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.model.property.Url;
+import net.fortuna.ical4j.util.RandomUidGenerator;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
@@ -125,8 +129,8 @@ public class CalendarOnline {
 		Property location = new Location(conferenceEdited.getCity() + "," + conferenceEdited.getCountry());
 		Property description = new Description("Fee:" + conferenceEdited.getFeeRegistration());
 		Property name = new Summary(conferenceEdited.getTitle());
-		Property startDate = new DtStart(conferenceEdited.getStartDate().format(formatter).toString());
-		Property endDate = new DtEnd(conferenceEdited.getEndDate().format(formatter).toString());
+		Property startDate = new DtStart(new Date(conferenceEdited.getStartDate().format(formatter)));
+		Property endDate = new DtEnd(new Date(conferenceEdited.getEndDate().format(formatter)));
 		Property uid = new Uid(conferenceEdited.getUid());
 		PropertyList<Property> propertyListVevent = new PropertyList<>();
 		propertyListVevent.add(url);
@@ -160,10 +164,65 @@ public class CalendarOnline {
 		return ConferenceReader.createConference(vEventConferenceFound);
 	}
 	
+	/**
+	 * @param ve event to add
+	 * @throws CalDAV4JException
+	 */
 	public void addOnlineConference(VEvent ve) throws CalDAV4JException {
 		Objects.requireNonNull(ve);
 		Objects.requireNonNull(ve.getUid());
 		collectionCalendarsOnline.add(httpclient, ve, null);
+	}
+	
+	/**
+	 * @param uid uid of the event to delete
+	 * @throws CalDAV4JException
+	 */
+	public void deleteOnlineConference(String uid) throws CalDAV4JException {
+		Objects.requireNonNull(uid);
+		collectionCalendarsOnline.delete(httpclient, collectionCalendarsOnline.getCalendarCollectionRoot()+"/"+uid+".ics");
+	}
+	
+	/** 
+	 * @param url
+	 * @param title
+	 * @param startDate
+	 * @param endDate
+	 * @param registrationFee
+	 * @param country
+	 * @param city
+	 * @throws URISyntaxException
+	 * @throws ParseException
+	 * @throws CalDAV4JException
+	 */
+	public void addOnlineEvent(URL url, String title, LocalDate startDate, LocalDate endDate, Double registrationFee,
+			String country, String city) throws URISyntaxException, ParseException, CalDAV4JException {
+		RandomUidGenerator rug=new RandomUidGenerator();
+		Conference tempConf=new Conference(rug.generateUid().toString().substring(4), url, title, startDate, endDate, registrationFee, country, city);
+		VEvent tempEvent = conferenceToVEvent(tempConf);
+		addOnlineConference(tempEvent);
+	}
+	
+	/**
+	 * @param uidToDelete uid of the event to modify
+	 * @param url
+	 * @param title
+	 * @param startDate
+	 * @param endDate
+	 * @param registrationFee
+	 * @param country
+	 * @param city
+	 * @throws URISyntaxException
+	 * @throws ParseException
+	 * @throws CalDAV4JException
+	 */
+	public void modifyOnlineEvent(String uidToDelete,URL url, String title, LocalDate startDate, LocalDate endDate, Double registrationFee,
+			String country, String city) throws URISyntaxException, ParseException, CalDAV4JException {
+		deleteOnlineConference(uidToDelete);
+		RandomUidGenerator rug=new RandomUidGenerator();
+		Conference tempConf=new Conference(rug.generateUid().toString().substring(4), url, title, startDate, endDate, registrationFee, country, city);
+		VEvent tempEvent = conferenceToVEvent(tempConf);
+		addOnlineConference(tempEvent);
 	}
 
 }
