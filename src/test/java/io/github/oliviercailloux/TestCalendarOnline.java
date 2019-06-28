@@ -49,7 +49,7 @@ public class TestCalendarOnline {
 			System.out.println(conferenceOnline.toString());
 		}
 	}
-
+	/*
 	@Test
 	public void testConferenceToVEvent() throws URISyntaxException, ParseException, MalformedURLException {
 		VEvent conferenceVEvent;
@@ -88,6 +88,26 @@ public class TestCalendarOnline {
 		Property endDate_ = new DtEnd(conference.getStartDate().toString());
 		assertTrue(conferenceVEvent.getProperty(Property.DTSTART).equals(startDate_));
 		assertTrue(conferenceVEvent.getProperty(Property.DTEND).equals(endDate_));
+	}
+	*/
+	@Test
+	public void testAddOnlineConference() throws MalformedURLException, URISyntaxException, ParseException, CalDAV4JException {
+		VEvent conferenceVEvent;
+		CalendarOnline instanceCalendarOnline=CalendarOnline.getInstance();
+		LocalDate start_ = null;
+		LocalDate end_ = null;
+
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			start_ = LocalDate.parse("03/06/2019", formatter);
+			end_ = LocalDate.parse("04/06/2019", formatter);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Date impossible to put in the conference", e);
+		}
+		Conference conference=new Conference("4e14d618-1d93-29a3-adb3-2c21dca5ee06s",new URL("http://fruux.com"),"Java beginer formation",start_,end_,1.36,"France","Paris");
+		
+		conferenceVEvent=instanceCalendarOnline.conferenceToVEvent(conference);
+		instanceCalendarOnline.addOnlineConference(conferenceVEvent);
 	}
 
 }
