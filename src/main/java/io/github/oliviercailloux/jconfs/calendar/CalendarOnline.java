@@ -55,9 +55,9 @@ import io.github.oliviercailloux.jconfs.conference.ConferenceReader;
 import io.github.oliviercailloux.jconfs.conference.InvalidConferenceFormatException;
 
 /**
- * @author nikola This class permits to access to online conferences from
- *         https://fruux.com >>>>>>>
- *         master:src/main/java/io/github/oliviercailloux/jconfs/calendar/CalendarOnline.java
+ * @author nikola 
+ * This class permits to access to online conferences from
+ * https://fruux.com
  */
 public class CalendarOnline {
 	final private static String userNameFruux = "b3297431258";
@@ -65,14 +65,14 @@ public class CalendarOnline {
 	final private static String calendarIDFruux = "6e8c6372-eba5-43da-9eed-8e5413559c99";
 	private static CalendarOnline instanceCalendarOnline;
 	private CalDAVCollection collectionCalendarsOnline;
-	private static CloseableHttpClient httpclient;
+	private static CloseableHttpClient httpClient;
 
 	private CalendarOnline() {
 		HttpHost hostTarget;
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		credsProvider.setCredentials(new AuthScope("dav.fruux.com", 443),
 				new UsernamePasswordCredentials(userNameFruux, passwordFruux));
-		httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
+		httpClient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
 		hostTarget = new HttpHost("dav.fruux.com", 443, "https");
 		collectionCalendarsOnline = new CalDAVCollection("/calendars/" + userNameFruux + "/" + calendarIDFruux,
 				hostTarget, new CalDAV4JMethodFactory(), CalDAVConstants.PROC_ID_DEFAULT);
@@ -98,7 +98,7 @@ public class CalendarOnline {
 	public Set<Conference> getOnlineConferences() throws CalDAV4JException, InvalidConferenceFormatException {
 		GenerateQuery searchQuery = new GenerateQuery();
 		CalendarQuery calendarQuery = searchQuery.generate();
-		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpclient, calendarQuery);
+		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpClient, calendarQuery);
 		Set<Conference> listConferencesUser = new LinkedHashSet<>();
 		for (Calendar calendar : calendarsResult) {
 			ComponentList<VEvent> componentList = calendar.getComponents(Component.VEVENT);
@@ -122,7 +122,7 @@ public class CalendarOnline {
 	public void editConferenceOnline(Conference conferenceEdited)
 			throws ParseException, CalDAV4JException, URISyntaxException {
 		VEvent vEventConferenceModified = conferenceToVEvent(conferenceEdited);
-		collectionCalendarsOnline.updateMasterEvent(httpclient, vEventConferenceModified, null);
+		collectionCalendarsOnline.updateMasterEvent(httpClient, vEventConferenceModified, null);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class CalendarOnline {
 		GenerateQuery searchQuery = new GenerateQuery();
 		searchQuery.setFilter("VEVENT : UID==" + uid);
 		CalendarQuery calendarQuery = searchQuery.generate();
-		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpclient, calendarQuery);
+		List<Calendar> calendarsResult = collectionCalendarsOnline.queryCalendars(httpClient, calendarQuery);
 		for (Calendar calendar : calendarsResult) {
 			vEventConferenceFound = ICalendarUtils.getFirstEvent(calendar);
 		}

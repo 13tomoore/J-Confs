@@ -25,19 +25,18 @@ import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 
 public class TestCalendarOnline {
-	
-	
+
 	public void testGetOnlineConferenceFromUid() throws InvalidConferenceFormatException, CalDAV4JException {
-		CalendarOnline instanceCalendarOnline=CalendarOnline.getInstance();
+		CalendarOnline instanceCalendarOnline = CalendarOnline.getInstance();
 		Conference conferenceFound;
-		String uidSearch="4e14d618-1d93-40a3-adb9-3c01dca8ee67";
-		conferenceFound=instanceCalendarOnline.getConferenceFromUid(uidSearch);
-		assertEquals(conferenceFound.getTitle(),"Third iteration JAVA");
+		String uidSearch = "4e14d618-1d93-40a3-adb9-3c01dca8ee67";
+		conferenceFound = instanceCalendarOnline.getConferenceFromUid(uidSearch);
+		assertEquals(conferenceFound.getTitle(), "Third iteration JAVA");
 		assertEquals(conferenceFound.getUid(), uidSearch);
 		assertEquals(conferenceFound.getCity(), "Paris");
-		assertEquals(conferenceFound.getCountry(),"France");
-		assertEquals(conferenceFound.getStartDate().toString(),"2019-06-21");
-		assertEquals(conferenceFound.getFeeRegistration().toString(),"1.46");
+		assertEquals(conferenceFound.getCountry(), "France");
+		assertEquals(conferenceFound.getStartDate().toString(), "2019-06-21");
+		assertEquals(conferenceFound.getFeeRegistration().toString(), "1.46");
 	}
 
 	@Test
