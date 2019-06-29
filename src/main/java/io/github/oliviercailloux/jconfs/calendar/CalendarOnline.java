@@ -161,6 +161,9 @@ public class CalendarOnline {
 		for (Calendar calendar : calendarsResult) {
 			vEventConferenceFound = ICalendarUtils.getFirstEvent(calendar);
 		}
+		if(vEventConferenceFound==null) {
+			return null;
+		}
 		return ConferenceReader.createConference(vEventConferenceFound);
 	}
 

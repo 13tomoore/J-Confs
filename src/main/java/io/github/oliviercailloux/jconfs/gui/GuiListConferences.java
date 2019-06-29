@@ -42,8 +42,10 @@ import com.google.common.base.Strings;
  
 /**
  * @author nikola
+ *
  * This class GUI uses to show a list of conferences of a
- * searcher and with the possibility to edit it
+ * searcher and with the possibility to edit it.
+ * It takes conferences from fruux
  */
 public class GuiListConferences {
  
@@ -68,7 +70,7 @@ public class GuiListConferences {
     private DateTime dateStart;
     private DateTime dateEnd;
     private Button btnSave;
-    private Button btnNew;
+    private Button btnClear;
     private Button btnDelete;
  
     public GuiListConferences() throws InvalidConferenceFormatException {
@@ -214,8 +216,10 @@ public class GuiListConferences {
     }
  
     /**
-     * Edit of a conference: delete and save the conference edited
-     *
+     * Edit and add a conference:
+     * Delete from fruux the current selected conference by the user
+     * and add a new conference with the value enter by the user
+     * The widget list is updates with new online conferences
      * @param e event that we catch
      */
     public void editConference(@SuppressWarnings("unused") Event e) {
@@ -234,6 +238,10 @@ public class GuiListConferences {
         }
     }
  
+    /**
+     * Delete the conference in fruux that had been selected by the user
+     * @param e vent that we catch
+     */
     public void deleteConference(@SuppressWarnings("unused") Event e) {
         if (listConferences.getSelectionIndex() >= 0) {
             removeConference();
@@ -247,6 +255,10 @@ public class GuiListConferences {
         }
     }
  
+    /**
+     * Clear all widgets of the GUI
+     * @param e
+     */
     public void clearwidget(@SuppressWarnings("unused") Event e) {
         txtCity.setText("");
         txtCoutry.setText("");
@@ -256,6 +268,9 @@ public class GuiListConferences {
         listConferences.deselectAll();
     }
  
+    /**
+     * Call the method from CalendarOnline to push in fruux the new conference
+     */
     public void addConference() {
         CalendarOnline instanceCalendarOnline = CalendarOnline.getInstance();
         LocalDate localDateStart = LocalDate.of(dateStart.getYear(), dateStart.getMonth() + 1, dateStart.getDay());
@@ -277,6 +292,9 @@ public class GuiListConferences {
         }
     }
  
+    /**
+     * Call the method from CalendarOnline to delete in fruux a conference
+     */
     public void removeConference() {
         CalendarOnline instanceCalendarOnline = CalendarOnline.getInstance();
         String uidDelete = listConferencesUser.get(listConferences.getSelectionIndex()).getUid();
@@ -351,15 +369,17 @@ public class GuiListConferences {
         btnSave = new Button(groupInfoConf, SWT.PUSH);
         btnSave.setText("Save Conference");
         GridData gridDataBtn = new GridData(SWT.RIGHT, SWT.BOTTOM, false, false);
+        gridDataBtn.widthHint=200;
         btnSave.setLayoutData(gridDataBtn);
- 
-        btnNew = new Button(groupInfoConf, SWT.PUSH);
-        btnNew.setText("New Conference");
-        btnNew.setLayoutData(gridDataBtn);
- 
+       
         btnDelete = new Button(groupInfoConf, SWT.PUSH);
         btnDelete.setText("Delete Conference");
         btnDelete.setLayoutData(gridDataBtn);
+       
+        btnClear = new Button(groupInfoConf, SWT.PUSH);
+        btnClear.setText("Clear fields");
+        btnClear.setLayoutData(gridDataBtn);
+ 
     }
  
     /**
@@ -371,7 +391,7 @@ public class GuiListConferences {
         txtRegisFee.addVerifyListener(ListenerAction::checkDoubleInput);
         listConferences.addListener(SWT.Selection, this::fillInAllFields);
         btnSave.addListener(SWT.Selection, this::editConference);
-        btnNew.addListener(SWT.Selection, this::clearwidget);
+        btnClear.addListener(SWT.Selection, this::clearwidget);
         btnDelete.addListener(SWT.Selection, this::deleteConference);
     }
  
